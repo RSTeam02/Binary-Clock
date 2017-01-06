@@ -4,7 +4,7 @@ class BinaryTable {
         let str = "";
         let binArr = [];
         //unicode for exponents 0...6        
-        let utfExp = ["\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074", "\u2075", "\u2076", "\u2077", "\u2078"];
+        let utfExp = ["\u2070", "\u00B9", "\u00B2", "\u00B3", "\u2074", "\u2075", "\u2076"];
         
         //dec to bin conversions
         for (let i = 0; i < dec.length; i++) {
