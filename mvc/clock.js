@@ -2,6 +2,7 @@ class Clock {
     //switch AM/PM or 24h mode
     timeDate() {
 
+        //every unit with 2 digits
         var optionsDate = {
             year: "2-digit", month: "2-digit", day: "2-digit"
         };
