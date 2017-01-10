@@ -9,17 +9,30 @@ class Controller {
         setInterval(() => {
             this.updateDisplay();
         }, 1000)
-        
+
     }
-    
+
     //save settings when clicked one of buttons
     saveSettings() {
 
-        for (let i = 0; i < this.id.length; i++) {
+        //store cb settings
+        for (let i = 0; i < this.id.length - 2; i++) {
             document.getElementById(this.id[i]).addEventListener("click", () => {
                 (document.getElementById(this.id[i]).checked)
                     ? localStorage.setItem(`setting${i + 1}`, true)
                     : localStorage.setItem(`setting${i + 1}`, false);
+            });
+        }
+        let classname = document.getElementsByClassName("rb");
+
+        //store rb settings,...theres maybe a better solution?
+        for (let i = 0; i < classname.length; i++) {
+            classname[i].addEventListener("click", () => {
+                for (let i = 3; i < this.id.length; i++) {
+                    (document.getElementById(this.id[i]).checked)
+                        ? localStorage.setItem(`setting${i + 1}`, true)
+                        : localStorage.setItem(`setting${i + 1}`, false);
+                }
             });
         }
     }
@@ -47,11 +60,13 @@ class Controller {
     }
 
     loadSettings() {
+
         for (let i = 0; i < this.id.length; i++) {
             (localStorage.getItem(`setting${i + 1}`) !== null)
                 ? document.getElementById(this.id[i]).checked = JSON.parse(localStorage.getItem(`setting${i + 1}`))
                 : document.getElementById(this.id[i]).checked = true;
         }
+
     }
 
 }
