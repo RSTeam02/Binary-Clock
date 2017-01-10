@@ -1,6 +1,6 @@
 class Clock {
     //switch AM/PM or 24h mode
-    timeDate() {
+    timeDate(h24) {
 
         //every unit with 2 digits
         var optionsDate = {
@@ -10,7 +10,7 @@ class Clock {
         var timePart, datePart, apm;
         var date = new Date();
 
-        if (document.getElementById("24h").checked) {
+        if (h24) {
             document.getElementById("ampm").innerHTML = "AM/PM";
             timePart = date.toLocaleTimeString('en-GB').split(':');
             datePart = date.toLocaleDateString('en-GB', optionsDate).split('/');
