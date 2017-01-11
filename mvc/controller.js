@@ -1,7 +1,8 @@
 class Controller {
 
     constructor() {
-        this.id = ["hl", "01", "dec", "24h", "apm"];
+        this.classCb = document.getElementsByClassName("cb");
+        this.classRb = document.getElementsByClassName("rb");
         this.view = new View();
         this.saveSettings();
         this.loadSettings();
@@ -9,29 +10,27 @@ class Controller {
         setInterval(() => {
             this.updateDisplay();
         }, 1000)
-
     }
 
     //save settings when clicked one of buttons
     saveSettings() {
 
-        //store cb settings
-        for (let i = 0; i < this.id.length - 2; i++) {
-            document.getElementById(this.id[i]).addEventListener("click", () => {
-                (document.getElementById(this.id[i]).checked)
-                    ? localStorage.setItem(`setting${i + 1}`, true)
-                    : localStorage.setItem(`setting${i + 1}`, false);
+        //store checkbox settings
+        for (let i = 0; i < this.classCb.length; i++) {
+            document.getElementById(this.classCb[i].id).addEventListener("click", () => {
+                (document.getElementById(this.classCb[i].id).checked)
+                    ? localStorage.setItem(`cbSetting${i}`, true)
+                    : localStorage.setItem(`cbSetting${i}`, false);
             });
         }
-        let classname = document.getElementsByClassName("rb");
 
-        //store rb settings,...theres maybe a better solution?
-        for (let i = 0; i < classname.length; i++) {
-            classname[i].addEventListener("click", () => {
-                for (let i = 3; i < this.id.length; i++) {
-                    (document.getElementById(this.id[i]).checked)
-                        ? localStorage.setItem(`setting${i + 1}`, true)
-                        : localStorage.setItem(`setting${i + 1}`, false);
+        //store radiobtn settings
+        for (let i = 0; i < this.classRb.length; i++) {
+            this.classRb[i].addEventListener("click", () => {
+                for (let i = 0; i < this.classRb.length; i++) {
+                    (document.getElementById(this.classRb[i].id).checked)
+                        ? localStorage.setItem(`rbSetting${i}`, true)
+                        : localStorage.setItem(`rbSetting${i}`, false);
                 }
             });
         }
@@ -61,10 +60,16 @@ class Controller {
 
     loadSettings() {
 
-        for (let i = 0; i < this.id.length; i++) {
-            (localStorage.getItem(`setting${i + 1}`) !== null)
-                ? document.getElementById(this.id[i]).checked = JSON.parse(localStorage.getItem(`setting${i + 1}`))
-                : document.getElementById(this.id[i]).checked = true;
+        for (let i = 0; i < this.classCb.length; i++) {
+            (localStorage.getItem(`cbSetting${i}`) !== null)
+                ? document.getElementById(this.classCb[i].id).checked = JSON.parse(localStorage.getItem(`cbSetting${i}`))
+                : document.getElementById(this.classCb[i].id).checked = true;
+        }
+
+        for (let i = 0; i < this.classRb.length; i++) {
+            (localStorage.getItem(`rbSetting${i}`) !== null)
+                ? document.getElementById(this.classRb[i].id).checked = JSON.parse(localStorage.getItem(`rbSetting${i}`))
+                : document.getElementById(this.classRb[i].id).checked = true;
         }
 
     }
