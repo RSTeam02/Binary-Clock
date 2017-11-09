@@ -1,4 +1,8 @@
-class Controller {
+import { View } from "./view.js";
+import { Clock } from "./clock.js";
+import { BinaryTable } from "./binaryTable.js";
+
+export class Controller {
 
     constructor() {
         this.classCb = document.getElementsByClassName("cb");
@@ -53,8 +57,9 @@ class Controller {
 
     updateDisplay() {
         let h24 = document.getElementById("24h").checked;
-        let bt = new BinaryTable();
-        this.view.domView(bt.dec2Bin(new Clock().timeDate(h24)));
+        
+        let clock = new Clock();
+        this.view.domView(clock.timeDate(h24));
         this.settings();
     }
 

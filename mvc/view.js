@@ -1,8 +1,10 @@
+import { BinaryTable } from "./binaryTable.js";
 
-class View {
+export class View extends BinaryTable{
 
-    domView(text) {
-        document.getElementById("binTable").innerHTML = text;
+    domView(text) {        
+        document.getElementById("binTable").innerHTML = super.dec2Bin(text);
+        document.getElementById("ampm").innerHTML = text.apm;
     }
 
     invisBin() {
@@ -10,7 +12,7 @@ class View {
         for (let i = 0; i < colID.length; i++) {
             colID[i].style.color = 'transparent';
         }
-    }
+    }    
 
     invisDec() {
         let colID = document.getElementsByClassName("dec");
@@ -22,9 +24,9 @@ class View {
     highlight() {
         let colID = document.getElementsByClassName("bin");
         for (let i = 0; i < colID.length; i++) {
-            (colID[i].innerHTML !== "0")
-                ? colID[i].style.backgroundColor = 'lightgreen'
-                : colID[i].style.backgroundColor = 'transparent';
+            colID[i].style.backgroundColor = (colID[i].innerHTML !== "0")
+                ? 'lightgreen'
+                : 'transparent';
         }
     }
 
